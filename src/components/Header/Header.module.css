@@ -1,0 +1,83 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-white);
+  box-shadow: 0 2px 12px rgba(43, 127, 176, 0.1);
+}
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+}
+
+/* Десктопне/планшетне меню — приховане на телефоні */
+.desktopNav {
+  display: none;
+}
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  font-weight: 600;
+  color: var(--color-gray-700);
+  border-radius: 8px;
+  transition:
+    color 0.2s,
+    background 0.2s;
+}
+.link:hover {
+  color: var(--color-primary-dark);
+  background: var(--color-ice);
+}
+.active {
+  color: var(--color-primary-dark);
+  background: var(--color-ice);
+}
+
+/* Бургер (телефон) */
+.burger {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: var(--color-gray-700);
+  border-radius: 8px;
+}
+.burger:hover {
+  background: var(--color-ice);
+}
+.mobileNav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px var(--gutter) 16px;
+  background: var(--color-white);
+  border-top: 1px solid var(--color-gray-100);
+  box-shadow: 0 12px 24px rgba(43, 127, 176, 0.12);
+}
+.mobileNav .link {
+  width: 100%;
+  min-height: 52px;
+  font-size: 1.05rem;
+  border-bottom: 1px solid var(--color-gray-100);
+  border-radius: 0;
+}
+
+/* Планшет і ПК: повне меню замість бургера */
+@media (min-width: 768px) {
+  .desktopNav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .burger,
+  .mobileNav {
+    display: none;
+  }
+}

@@ -1,0 +1,30 @@
+:root {
+  /* Кольори: білий, сірий, світло-синій (тема холоду) */
+  --color-white: #ffffff;
+  --color-bg-alt: #f4f7fa;
+  --color-gray-100: #e6ebf0;
+  --color-gray-400: #9aa5b1;
+  --color-gray-700: #3e4c59;
+  --color-text: #1f2933;
+  --color-ice: #e3f4fd;
+  --color-primary: #4aa8d8;
+  --color-primary-light: #8fd0f2;
+  --color-primary-dark: #2b7fb0;
+  --gradient-frost: linear-gradient(135deg, #e3f4fd 0%, #ffffff 60%, #f4f7fa 100%);
+
+  /* Розміри */
+  --header-height: 72px;
+  --radius: 12px;
+  --shadow: 0 4px 20px rgba(43, 127, 176, 0.12);
+  --container-width: 1200px;
+  --gutter: 16px;
+
+  --font-main: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /*
+   * Брейкпоінти (CSS-змінні в @media не працюють, тому довідка):
+   *   телефон  < 768px   (базові стилі, mobile-first)
+   *   планшет  >= 768px  @media (min-width: 768px)
+   *   ПК       >= 1024px @media (min-width: 1024px)
+   */
+}

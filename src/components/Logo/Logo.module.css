@@ -1,0 +1,15 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.image {
+  height: 100%;
+  width: auto;
+}
+.header {
+  height: 56px;
+}
+.footer {
+  height: 88px;
+}

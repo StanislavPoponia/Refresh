@@ -1,0 +1,25 @@
+/* Спільні стилі секцій головної сторінки */
+.section {
+  padding-block: 56px;
+  scroll-margin-top: var(--header-height);
+}
+.sectionAlt {
+  background: var(--color-bg-alt);
+}
+.sectionTitle {
+  margin-bottom: 12px;
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  text-align: center;
+}
+.sectionLead {
+  max-width: 720px;
+  margin: 0 auto 36px;
+  text-align: center;
+  color: var(--color-gray-700);
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-block: 88px;
+  }
+}
