@@ -1,0 +1,62 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-gray-100);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.25s;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+.photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+/* Картка без фото: однотонний блок з іконкою за темою */
+.placeholder {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  color: var(--color-primary);
+  background: var(--gradient-frost);
+}
+.body {
+  display: grid;
+  gap: 2px;
+  padding: 14px 16px 18px;
+}
+.name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-brand);
+}
+.country {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-gray-400);
+}
+.description {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--color-gray-700);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+  .card:hover {
+    transform: none;
+  }
+}

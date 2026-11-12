@@ -10,6 +10,12 @@ export interface PhoneContact {
 export interface ContactInfo {
   company: string;
   city: string;
+  /** Повна адреса для відображення */
+  address: string;
+  /** Стара назва адреси (вулицю перейменовано) — показується поруч з новою */
+  formerAddress?: string;
+  /** Рядок для пошуку на Google Maps (карта і посилання) */
+  mapQuery: string;
   email: string;
   phones: PhoneContact[];
   schedule: { days: string; hours: string }[];

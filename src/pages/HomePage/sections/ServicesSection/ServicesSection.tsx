@@ -1,20 +1,25 @@
 import clsx from 'clsx';
 import { Wrench } from 'lucide-react';
 import { Reveal } from '../../../../components/Reveal/Reveal';
-import { ReeferIllustration } from '../../../../components/ReeferIllustration/ReeferIllustration';
+import repairPhoto from '../../../../assets/images/services-repair.webp';
 import { services } from '../../../../data/services';
 import pageStyles from '../../HomePage.module.css';
 import styles from './ServicesSection.module.css';
 
 export function ServicesSection() {
   return (
-    <section id="services" className={pageStyles.section}>
+    <section id="services" className={clsx(pageStyles.section, styles.root)}>
       <div className="container">
         <h2 className={pageStyles.sectionTitle}>Послуги</h2>
 
         <Reveal className={styles.intro}>
-          {/* Сюди можна підставити реальне фото: <img src={photo} alt="..." loading="lazy" /> */}
-          <ReeferIllustration className={styles.photo} />
+          <img
+            src={repairPhoto}
+            alt="Майстер ремонтує рефрижераторну установку на напівпричепі"
+            className={styles.photo}
+            loading="lazy"
+            decoding="async"
+          />
           <div className={styles.introText}>
             <h3>Ремонт і діагностика рефрижераторів</h3>
             <p>

@@ -10,7 +10,7 @@ export function AboutSection() {
   const { open: openContacts } = useContactsModal();
 
   return (
-    <section id="about" className={clsx(pageStyles.section, pageStyles.sectionAlt)}>
+    <section id="about" className={clsx(pageStyles.section, styles.root)}>
       <div className="container">
         <h2 className={pageStyles.sectionTitle}>Про нас</h2>
         <p className={pageStyles.sectionLead}>{aboutIntro}</p>

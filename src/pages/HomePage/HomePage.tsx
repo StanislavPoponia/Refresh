@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { scrollToSection, type ScrollState } from '../../hooks/useSectionNavigation';
+import { BrandsSection } from './sections/BrandsSection/BrandsSection';
 import { AboutSection } from './sections/AboutSection/AboutSection';
 import { HeroSection } from './sections/HeroSection/HeroSection';
 import { ServicesSection } from './sections/ServicesSection/ServicesSection';
@@ -26,6 +27,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <ServicesSection />
+      <BrandsSection />
       <AboutSection />
     </>
   );

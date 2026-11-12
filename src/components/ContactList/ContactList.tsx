@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Clock, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
-import { contacts, emailLink, telLink, viberLink } from '../../data/contacts';
+import { contacts, emailLink, mapLink, telLink, viberLink } from '../../data/contacts';
 import styles from './ContactList.module.css';
 
 interface ContactListProps {
@@ -15,8 +15,13 @@ export function ContactList({ variant = 'modal' }: ContactListProps) {
       <li className={styles.item}>
         <MapPin className={styles.icon} aria-hidden="true" />
         <div>
-          <span className={styles.label}>Місто</span>
-          <span className={styles.value}>{contacts.city}</span>
+          <span className={styles.label}>Адреса</span>
+          <a href={mapLink} className={styles.link} target="_blank" rel="noopener noreferrer">
+            {contacts.address}
+          </a>
+          {contacts.formerAddress && (
+            <span className={styles.value}>({contacts.formerAddress})</span>
+          )}
         </div>
       </li>
 
@@ -47,7 +52,7 @@ export function ContactList({ variant = 'modal' }: ContactListProps) {
         <Mail className={styles.icon} aria-hidden="true" />
         <div>
           <span className={styles.label}>Пошта</span>
-          <a href={emailLink} className={styles.link}>
+          <a href={emailLink} className={styles.link} target="_blank" rel="noopener noreferrer">
             {contacts.email}
           </a>
         </div>

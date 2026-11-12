@@ -3,7 +3,9 @@
   place-items: center;
   min-height: 60vh;
   padding-block: 56px;
-  background: var(--gradient-frost);
+  background-image: var(--photo-overlay), url('../../assets/images/bg-reefers.webp');
+  background-size: cover;
+  background-position: center;
 }
 .box {
   display: grid;
@@ -28,11 +30,11 @@
   margin-top: 8px;
   padding: 0 32px;
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--color-on-primary);
   background: var(--color-primary);
   border-radius: var(--radius);
   transition: background 0.2s;
 }
 .button:hover {
-  background: var(--color-primary-dark);
+  background: var(--color-primary-hover);
 }

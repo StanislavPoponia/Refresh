@@ -1,5 +1,4 @@
-import { Snowflake } from 'lucide-react';
-import { ReeferIllustration } from '../../../../components/ReeferIllustration/ReeferIllustration';
+import { ReeferTypes } from '../../../../components/ReeferTypes/ReeferTypes';
 import { useContactsModal } from '../../../../context/ContactsModalContext';
 import { contacts } from '../../../../data/contacts';
 import { scrollToSection } from '../../../../hooks/useSectionNavigation';
@@ -12,9 +11,6 @@ export function HeroSection() {
     <section id="top" className={styles.hero}>
       <div className={`container ${styles.inner}`}>
         <div className={styles.text}>
-          <span className={styles.badge}>
-            <Snowflake size={16} aria-hidden="true" /> {contacts.company}
-          </span>
           <h1 className={styles.title}>
             Ремонт і діагностика рефрижераторів у місті {contacts.city}
           </h1>
@@ -35,7 +31,7 @@ export function HeroSection() {
             </button>
           </div>
         </div>
-        <ReeferIllustration className={styles.illustration} />
+        <ReeferTypes className={styles.illustration} />
       </div>
     </section>
   );

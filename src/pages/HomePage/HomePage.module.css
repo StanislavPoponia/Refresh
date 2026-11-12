@@ -7,11 +7,22 @@
   background: var(--color-bg-alt);
 }
 .sectionTitle {
+  text-shadow:
+    0 0 10px var(--color-page),
+    0 0 24px var(--color-page);
   margin-bottom: 12px;
   font-size: clamp(1.6rem, 4vw, 2.25rem);
   text-align: center;
 }
 .sectionLead {
+  padding: 14px 22px;
+  background: color-mix(in srgb, var(--color-page) 72%, transparent);
+  border-radius: var(--radius);
+  backdrop-filter: blur(3px);
+  text-shadow:
+    0 0 6px var(--color-page),
+    0 0 14px var(--color-page),
+    0 0 28px var(--color-page);
   max-width: 720px;
   margin: 0 auto 36px;
   text-align: center;

@@ -8,7 +8,14 @@
       content="RefChe — ремонт і діагностика рефрижераторів у Чернівцях. Холодильні установки для вантажівок різних типів."
     />
     <meta name="theme-color" content="#4aa8d8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      // Застосувати збережену тему до першого малювання (без миготіння)
+      try {
+        var t = localStorage.getItem('refche-theme');
+        if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) {}
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/cold.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

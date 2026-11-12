@@ -7,8 +7,17 @@
   height: 100%;
   width: auto;
 }
+.name {
+  margin-left: 2px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--color-brand);
+  transition: color 0.3s;
+}
 .header {
-  height: 56px;
+  height: var(--logo-height, 56px);
+  transition: height 0.3s ease;
 }
 .footer {
   height: 88px;

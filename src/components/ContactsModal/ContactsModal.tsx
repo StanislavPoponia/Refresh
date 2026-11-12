@@ -5,6 +5,7 @@ import { X } from 'lucide-react';
 import { useContactsModal } from '../../context/ContactsModalContext';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { ContactList } from '../ContactList/ContactList';
+import { ContactMap } from '../ContactMap/ContactMap';
 import styles from './ContactsModal.module.css';
 
 /** Спливаюче вікно з контактами. Закривається: кнопка ✕, клік по фону, Escape. */
@@ -62,6 +63,7 @@ export function ContactsModal() {
               Зв’яжіться з нами — запишіться на консультацію або ремонт.
             </p>
             <ContactList variant="modal" />
+            <ContactMap variant="modal" />
           </motion.div>
         </motion.div>
       )}

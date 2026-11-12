@@ -1,6 +1,9 @@
 :root {
   /* Кольори: білий, сірий, світло-синій (тема холоду) */
   --color-white: #ffffff;
+  --color-page: #ffffff; /* фон сторінки */
+  --color-surface: #ffffff; /* картки, хедер, модалка */
+  --color-on-primary: #ffffff; /* текст на акцентних кнопках */
   --color-bg-alt: #f4f7fa;
   --color-gray-100: #e6ebf0;
   --color-gray-400: #9aa5b1;
@@ -9,13 +12,32 @@
   --color-ice: #e3f4fd;
   --color-primary: #4aa8d8;
   --color-primary-light: #8fd0f2;
-  --color-primary-dark: #2b7fb0;
+  --color-primary-dark: #2b7fb0; /* акцентний текст */
+  --color-primary-hover: #2b7fb0; /* фон кнопки при наведенні */
+  --color-brand: #2f8fcf; /* колір логотипу COLD (м'який синій) */
   --gradient-frost: linear-gradient(135deg, #e3f4fd 0%, #ffffff 60%, #f4f7fa 100%);
+  /* Напівпрозорий шар поверх фонових фото секцій (щоб текст читався) */
+  /* Зліва — щільніше (під текст), праворуч плавно прозорий — фото чітке */
+  --photo-overlay: linear-gradient(
+    90deg,
+    rgba(236, 247, 253, 0.8) 0%,
+    rgba(236, 247, 253, 0.42) 38%,
+    rgba(255, 255, 255, 0) 100%
+  );
 
   /* Розміри */
   --header-height: 72px;
   --radius: 12px;
   --shadow: 0 4px 20px rgba(43, 127, 176, 0.12);
+  --shadow-header: 0 2px 12px rgba(43, 127, 176, 0.1);
+  --shadow-dropdown: 0 12px 24px rgba(43, 127, 176, 0.12);
+
+  /* Ілюстрація вантажівки */
+  --ill-box-top: #ffffff;
+  --ill-box-bottom: #e3f4fd;
+  --ill-chassis: #3e4c59;
+  --ill-tire: #1f2933;
+  color-scheme: light;
   --container-width: 1200px;
   --gutter: 16px;
 
@@ -27,4 +49,55 @@
    *   планшет  >= 768px  @media (min-width: 768px)
    *   ПК       >= 1024px @media (min-width: 1024px)
    */
+}
+
+/*
+ * Темна тема: "мокрий асфальт" + гарячі червоні акценти
+ * (холод -> тепло, як перемикання кондиціонера з охолодження на обігрів).
+ */
+:root[data-theme='dark'] {
+  --color-page: #0a0a0b;
+  --color-surface: #25282c;
+  --color-bg-alt: #141517;
+  --color-gray-100: #3a3e44;
+  --color-gray-400: #8d939b;
+  --color-gray-700: #d5d8dc;
+  --color-text: #eceef0;
+  --color-ice: #3b2326;
+  --color-primary: #d93a40;
+  --color-primary-light: #ff8a80;
+  --color-primary-dark: #ff7b72;
+  --color-primary-hover: #b52b31;
+  --color-brand: #e0454b; /* колір логотипу HOT (м'який червоний) */
+  --gradient-frost: linear-gradient(135deg, #1c1213 0%, #0a0a0b 60%, #141517 100%);
+  --photo-overlay: linear-gradient(
+    90deg,
+    rgba(30, 10, 12, 0.92) 0%,
+    rgba(14, 10, 11, 0.72) 35%,
+    rgba(10, 10, 11, 0.12) 100%
+  );
+
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow-header: 0 2px 14px rgba(0, 0, 0, 0.7);
+  --shadow-dropdown: 0 12px 24px rgba(0, 0, 0, 0.6);
+
+  --ill-box-top: #3a3e44;
+  --ill-box-bottom: #25282c;
+  --ill-chassis: #50555c;
+  --ill-tire: #0a0a0b;
+  color-scheme: dark;
+}
+
+/* Телефон: текст займає всю ширину, тому шар щільніший по всій ширині */
+@media (max-width: 767px) {
+  :root {
+    --photo-overlay: linear-gradient(
+      90deg,
+      rgba(236, 247, 253, 0.78) 0%,
+      rgba(236, 247, 253, 0.6) 100%
+    );
+  }
+  :root[data-theme='dark'] {
+    --photo-overlay: linear-gradient(90deg, rgba(20, 10, 11, 0.9) 0%, rgba(12, 10, 11, 0.8) 100%);
+  }
 }
