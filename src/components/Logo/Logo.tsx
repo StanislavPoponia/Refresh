@@ -29,7 +29,7 @@ export function Logo({ size = 'header', onNavigate, showName = false }: LogoProp
 
   return (
     <a
-      href="/"
+      href={import.meta.env.BASE_URL}
       className={clsx(styles.logo, styles[size])}
       onClick={handleClick}
       aria-label="RefChe — на початок сайту"

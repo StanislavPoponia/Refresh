@@ -12,13 +12,32 @@
   text-align: center;
 }
 .code {
-  font-size: clamp(4rem, 15vw, 7rem);
+  font-size: clamp(2.5rem, 9vw, 4rem);
   font-weight: 800;
   line-height: 1;
   color: var(--color-primary-light);
 }
+.trailer {
+  width: min(100%, 460px);
+  height: auto;
+  margin-block: 8px;
+}
+.alarm {
+  animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink {
+  to {
+    opacity: 0.15;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .alarm {
+    animation: none;
+  }
+}
 .title {
-  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  font-size: clamp(1.25rem, 4.5vw, 2rem);
+  max-width: 28ch;
 }
 .text {
   color: var(--color-gray-700);
