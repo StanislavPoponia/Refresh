@@ -22,3 +22,17 @@
 .footer {
   height: 88px;
 }
+
+/* Вузькі телефони (~320 px): у хедері лишаємо тільки знак, назва займає забагато місця */
+@media (max-width: 374px) {
+  .header .name {
+    display: none;
+  }
+}
+
+/* Планшет (768–1023 px): ліва колонка хедера тісна через перемикач мови, назву ховаємо */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .header .name {
+    display: none;
+  }
+}

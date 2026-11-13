@@ -37,7 +37,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       ?.setAttribute('content', theme === 'dark' ? '#0a0a0b' : '#4aa8d8');
     document
       .querySelector('link[rel="icon"]')
-      ?.setAttribute('href', import.meta.env.BASE_URL + (theme === 'dark' ? 'hot.svg' : 'cold.svg'));
+      ?.setAttribute(
+        'href',
+        import.meta.env.BASE_URL + (theme === 'dark' ? 'hot.svg' : 'cold.svg'),
+      );
   }, [theme]);
 
   const toggleTheme = useCallback(() => {

@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { MapPin } from 'lucide-react';
-import { contacts, mapEmbedSrc, mapLink } from '../../data/contacts';
+import { format, useLanguage } from '../../context/LanguageContext';
+import { mapEmbedSrc, mapLink } from '../../data/contacts';
 import styles from './ContactMap.module.css';
 
 interface ContactMapProps {
@@ -13,12 +14,15 @@ interface ContactMapProps {
  * клік по карті одразу відкриває цю адресу в Google Maps (нова вкладка / додаток).
  */
 export function ContactMap({ variant = 'modal' }: ContactMapProps) {
+  const { lang, t } = useLanguage();
+  const address = { address: t.contacts.address };
+
   return (
     <div className={clsx(styles.map, styles[variant])}>
       <iframe
         className={styles.frame}
-        src={mapEmbedSrc}
-        title={`Карта: ${contacts.address}`}
+        src={mapEmbedSrc(lang)}
+        title={format(t.contacts.mapTitle, address)}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
         tabIndex={-1}
@@ -28,10 +32,10 @@ export function ContactMap({ variant = 'modal' }: ContactMapProps) {
         href={mapLink}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Відкрити в Google Maps: ${contacts.address}`}
+        aria-label={format(t.contacts.mapOpenAria, address)}
       >
         <span className={styles.hint}>
-          <MapPin size={16} aria-hidden="true" /> Відкрити в Google Maps
+          <MapPin size={16} aria-hidden="true" /> {t.contacts.mapOpen}
         </span>
       </a>
     </div>

@@ -2,6 +2,7 @@ import type { MouseEvent } from 'react';
 import clsx from 'clsx';
 import logoCold from '../../assets/cold.svg';
 import logoHot from '../../assets/hot.svg';
+import { useLanguage } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
 import { contacts } from '../../data/contacts';
 import { useSectionNavigation } from '../../hooks/useSectionNavigation';
@@ -20,6 +21,7 @@ interface LogoProps {
 export function Logo({ size = 'header', onNavigate, showName = false }: LogoProps) {
   const { goTo } = useSectionNavigation();
   const { theme } = useTheme();
+  const { t } = useLanguage();
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -32,7 +34,7 @@ export function Logo({ size = 'header', onNavigate, showName = false }: LogoProp
       href={import.meta.env.BASE_URL}
       className={clsx(styles.logo, styles[size])}
       onClick={handleClick}
-      aria-label="RefChe — на початок сайту"
+      aria-label={t.logo.aria}
     >
       <img src={theme === 'dark' ? logoHot : logoCold} alt="RefChe" className={styles.image} />
       {showName && <span className={styles.name}>{contacts.company}</span>}

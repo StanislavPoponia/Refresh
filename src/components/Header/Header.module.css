@@ -22,6 +22,18 @@
   transition: height 0.3s ease;
 }
 
+/* Ліва частина: перемикач мови (вертикальний) зліва від логотипу */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+@media (min-width: 768px) {
+  .brand {
+    gap: 14px;
+  }
+}
+
 /* Права частина: перемикач теми + бургер */
 .actions {
   display: flex;
@@ -263,4 +275,43 @@
   .mobileNav {
     display: none;
   }
+}
+
+/* Планшет: щільніше меню, щоб не налазило на логотип і перемикач мови */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Меню зсунуте праворуч — ближче до перемикача теми, ніж до логотипу */
+  .inner {
+    grid-template-columns: auto 1fr auto;
+    column-gap: 12px;
+  }
+  .desktopNav {
+    justify-content: flex-end;
+    gap: 0;
+  }
+  .desktopNav .link {
+    padding: 0 8px;
+  }
+  .desktopNav .flake {
+    margin-right: 4px;
+  }
+}
+
+/* ПК: меню по центру вільного місця між логотипом і перемикачем теми (а не всього хедера) */
+@media (min-width: 1024px) {
+  .inner {
+    grid-template-columns: auto 1fr auto;
+    column-gap: 16px;
+  }
+  .desktopNav {
+    justify-content: center;
+  }
+}
+
+/* Активна тема: на її іконку вже не можна натиснути і вона не анімується при наведенні */
+.themeOption[aria-checked='true'] {
+  pointer-events: none;
+}
+.themeOption[aria-checked='true'] svg,
+.themeOption[aria-checked='true']:focus-visible svg {
+  transform: none;
 }

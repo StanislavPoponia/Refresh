@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { Flame, Snowflake } from 'lucide-react';
 import { Reveal } from '../../../../components/Reveal/Reveal';
+import { format, useLanguage } from '../../../../context/LanguageContext';
 import { useTheme } from '../../../../context/ThemeContext';
 import { brands } from '../../../../data/brands';
 import pageStyles from '../../HomePage.module.css';
@@ -9,41 +10,43 @@ import styles from './BrandsSection.module.css';
 /** Марки рефрижераторних установок, з якими працює компанія. */
 export function BrandsSection() {
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const Icon = theme === 'dark' ? Flame : Snowflake;
 
   return (
     <section id="brands" className={clsx(pageStyles.section, pageStyles.sectionAlt)}>
       <div className="container">
-        <h2 className={pageStyles.sectionTitle}>Марки, з якими працюємо</h2>
-        <p className={pageStyles.sectionLead}>
-          Ремонтуємо й обслуговуємо найпоширеніші в Європі та Україні рефрижераторні установки.
-        </p>
+        <h2 className={pageStyles.sectionTitle}>{t.brands.title}</h2>
+        <p className={pageStyles.sectionLead}>{t.brands.lead}</p>
 
         <Reveal>
           <ul className={styles.grid}>
-            {brands.map((brand) => (
-              <li key={brand.id} className={styles.card}>
-                {brand.image ? (
-                  <img
-                    src={brand.image}
-                    alt={`Установка ${brand.name} на рефрижераторі`}
-                    className={styles.photo}
-                    style={{ objectPosition: brand.position }}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                ) : (
-                  <div className={styles.placeholder} aria-hidden="true">
-                    <Icon size={40} />
+            {brands.map((brand) => {
+              const text = t.brands.items[brand.id];
+              return (
+                <li key={brand.id} className={styles.card}>
+                  {brand.image ? (
+                    <img
+                      src={brand.image}
+                      alt={format(t.brands.photoAlt, { name: brand.name })}
+                      className={styles.photo}
+                      style={{ objectPosition: brand.position }}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div className={styles.placeholder} aria-hidden="true">
+                      <Icon size={40} />
+                    </div>
+                  )}
+                  <div className={styles.body}>
+                    <h3 className={styles.name}>{brand.name}</h3>
+                    <span className={styles.country}>{text.country}</span>
+                    <p className={styles.description}>{text.description}</p>
                   </div>
-                )}
-                <div className={styles.body}>
-                  <h3 className={styles.name}>{brand.name}</h3>
-                  <span className={styles.country}>{brand.country}</span>
-                  <p className={styles.description}>{brand.description}</p>
-                </div>
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
         </Reveal>
       </div>

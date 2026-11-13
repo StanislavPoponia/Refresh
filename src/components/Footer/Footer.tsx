@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { Flame, Snowflake } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
 import { contacts } from '../../data/contacts';
 import { useSectionNavigation } from '../../hooks/useSectionNavigation';
@@ -13,6 +14,7 @@ import styles from './Footer.module.css';
 export function Footer() {
   const { goTo } = useSectionNavigation();
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const isDark = theme === 'dark';
 
   // Як у хедері: холодна тема — сніжинка, темна — вогник (без підсвітки активного розділу)
@@ -27,19 +29,22 @@ export function Footer() {
         <div className={styles.top}>
           <div className={styles.brand}>
             <Logo size="footer" />
-            <p className={styles.tagline}>
-              Ремонт і діагностика рефрижераторів у місті {contacts.city}.
-            </p>
+            <p className={styles.tagline}>{t.footer.tagline}</p>
           </div>
 
-          <nav className={styles.links} aria-label="Швидкі посилання">
+          <nav className={styles.links} aria-label={t.footer.quickLinks}>
             <button type="button" onClick={() => goTo('services')}>
-              {icon}Послуги
+              {icon}
+              {t.nav.services}
             </button>
             <button type="button" onClick={() => goTo('about')}>
-              {icon}Про нас
+              {icon}
+              {t.nav.about}
             </button>
-            <Link to="/shop">{icon}Магазин</Link>
+            <Link to="/shop">
+              {icon}
+              {t.nav.shop}
+            </Link>
           </nav>
         </div>
 
@@ -47,7 +52,7 @@ export function Footer() {
         <ContactMap variant="footer" />
 
         <p className={styles.copy}>
-          © {new Date().getFullYear()} {contacts.company}. Усі права захищені.
+          © {new Date().getFullYear()} {contacts.company}. {t.footer.rights}
         </p>
       </div>
     </footer>

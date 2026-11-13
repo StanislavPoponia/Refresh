@@ -1,0 +1,98 @@
+/* Вертикальний перемикач мови в стилі перемикача теми: UA зверху, EN знизу */
+.switch {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  width: 32px;
+  height: 56px;
+  padding: 0;
+  flex-shrink: 0;
+  background: var(--color-ice);
+  border: 1px solid var(--color-gray-100);
+  border-radius: 999px;
+  transition:
+    transform 0.25s ease,
+    background 0.3s,
+    border-color 0.3s;
+}
+/* Наведення: перемикач трохи збільшується */
+.switch:hover,
+.switch:focus-within {
+  transform: scale(1.12);
+}
+.thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc(100% - 6px);
+  height: calc(50% - 6px);
+  background: var(--color-primary);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
+}
+.second .thumb {
+  transform: translateY(calc(100% + 6px));
+}
+/* Значок біля вибраної мови: сніжинка (світла тема) або вогник (темна), видно при наведенні */
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -9px;
+  box-sizing: content-box;
+  padding: 2px;
+  color: var(--color-primary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-primary);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.4) rotate(-60deg);
+  transition:
+    opacity 0.2s,
+    transform 0.25s ease;
+  pointer-events: none;
+}
+:global([data-theme='dark']) .badge {
+  fill: currentColor;
+}
+.switch:hover .badge,
+.switch:focus-within .badge {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+.option {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 0;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--color-gray-400);
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.option:hover {
+  color: var(--color-primary-dark);
+}
+/* Вибрана мова — світлий текст на повзунку; клікнути можна лише на іншу */
+.option[aria-checked='true'] {
+  color: var(--color-on-primary);
+  cursor: default;
+}
+.option:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .switch,
+  .thumb,
+  .badge,
+  .option {
+    transition: none;
+  }
+}

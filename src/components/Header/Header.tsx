@@ -3,10 +3,12 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import clsx from 'clsx';
 import { Flame, Menu, Snowflake, X } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useContactsModal } from '../../context/ContactsModalContext';
 import { useActiveSection } from '../../hooks/useActiveSection';
 import { useSectionNavigation } from '../../hooks/useSectionNavigation';
+import { LanguageSwitch } from '../LanguageSwitch/LanguageSwitch';
 import { Logo } from '../Logo/Logo';
 import styles from './Header.module.css';
 
@@ -18,6 +20,7 @@ export function Header() {
   const { active: activeSection, hold } = useActiveSection();
   const { pathname } = useLocation();
   const { theme, setTheme } = useTheme();
+  const { t } = useLanguage();
   const isDark = theme === 'dark';
 
   const [scrolled, setScrolled] = useState(false);
@@ -35,6 +38,19 @@ export function Header() {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
+
+  // Відкрите мобільне меню ховається, щойно користувач починає скролити вниз
+  useEffect(() => {
+    if (!menuOpen) return;
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y > lastY + 4) setMenuOpen(false);
+      lastY = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [menuOpen]);
 
   // Закриваємо мобільне меню при зміні сторінки
   useEffect(() => {
@@ -82,7 +98,8 @@ export function Header() {
         aria-current={ariaCurrent('services')}
         onClick={() => handleSection('services')}
       >
-        {icon('services')}Послуги
+        {icon('services')}
+        {t.nav.services}
       </button>
       <button
         type="button"
@@ -90,10 +107,12 @@ export function Header() {
         aria-current={ariaCurrent('contacts')}
         onClick={handleContacts}
       >
-        {icon('contacts')}Контакти
+        {icon('contacts')}
+        {t.nav.contacts}
       </button>
       <NavLink to="/shop" className={linkClass('shop')} onClick={closeMenu}>
-        {icon('shop')}Магазин
+        {icon('shop')}
+        {t.nav.shop}
       </NavLink>
       <button
         type="button"
@@ -101,7 +120,8 @@ export function Header() {
         aria-current={ariaCurrent('about')}
         onClick={() => handleSection('about')}
       >
-        {icon('about')}Про нас
+        {icon('about')}
+        {t.nav.about}
       </button>
     </>
   );
@@ -109,16 +129,19 @@ export function Header() {
   return (
     <header className={clsx(styles.header, scrolled && styles.scrolled)}>
       <div className={clsx('container', styles.inner)}>
-        <Logo size="header" onNavigate={closeMenu} showName />
+        <div className={styles.brand}>
+          <LanguageSwitch />
+          <Logo size="header" onNavigate={closeMenu} showName />
+        </div>
 
-        <nav className={styles.desktopNav} aria-label="Головне меню">
+        <nav className={styles.desktopNav} aria-label={t.nav.mainMenu}>
           {nav}
         </nav>
 
         <div className={styles.actions}>
           <div
             role="radiogroup"
-            aria-label="Тема сайту"
+            aria-label={t.theme.label}
             className={clsx(styles.themeSwitch, isDark && styles.themeSwitchOn)}
           >
             <span className={styles.themeThumb} aria-hidden="true" />
@@ -126,8 +149,8 @@ export function Header() {
               type="button"
               role="radio"
               aria-checked={!isDark}
-              aria-label="Світла тема (холод)"
-              title="Світла тема (холод)"
+              aria-label={t.theme.light}
+              title={t.theme.light}
               className={clsx(styles.themeOption, styles.themeCold)}
               onClick={() => setTheme('light')}
             >
@@ -137,8 +160,8 @@ export function Header() {
               type="button"
               role="radio"
               aria-checked={isDark}
-              aria-label="Темна тема (обігрів)"
-              title="Темна тема (обігрів)"
+              aria-label={t.theme.dark}
+              title={t.theme.dark}
               className={clsx(styles.themeOption, styles.themeHot)}
               onClick={() => setTheme('dark')}
             >
@@ -150,7 +173,7 @@ export function Header() {
             type="button"
             className={styles.burger}
             onClick={() => setMenuOpen((value) => !value)}
-            aria-label={menuOpen ? 'Закрити меню' : 'Відкрити меню'}
+            aria-label={menuOpen ? t.nav.closeMenu : t.nav.openMenu}
             aria-expanded={menuOpen}
           >
             {menuOpen ? <X size={26} aria-hidden="true" /> : <Menu size={26} aria-hidden="true" />}
@@ -162,7 +185,7 @@ export function Header() {
         {menuOpen && (
           <motion.nav
             className={styles.mobileNav}
-            aria-label="Мобільне меню"
+            aria-label={t.nav.mobileMenu}
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}

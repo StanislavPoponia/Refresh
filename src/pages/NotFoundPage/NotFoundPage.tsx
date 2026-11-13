@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 import styles from './NotFoundPage.module.css';
 
 /** Причеп-рефрижератор збоку: агрегат спереду (ліворуч) не працює, індикатор аварії блимає. */
 function BrokenReeferTrailer() {
+  const { t } = useLanguage();
+
   return (
-    <svg
-      className={styles.trailer}
-      viewBox="0 0 420 200"
-      role="img"
-      aria-label="Причеп-рефрижератор із непрацюючим агрегатом"
-    >
+    <svg className={styles.trailer} viewBox="0 0 420 200" role="img" aria-label={t.notFound.svgAlt}>
       <defs>
         <linearGradient id="nf-box" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="var(--ill-box-top)" />
@@ -85,17 +83,17 @@ function BrokenReeferTrailer() {
 }
 
 export default function NotFoundPage() {
+  const { t } = useLanguage();
+
   return (
     <section className={styles.page}>
       <div className={`container ${styles.box}`}>
         <p className={styles.code}>404</p>
         <BrokenReeferTrailer />
-        <h1 className={styles.title}>Схоже, агрегат не працює, перезапустіть його</h1>
-        <p className={styles.text}>
-          Сторінку не знайдено: посилання застаріло або адресу введено з помилкою.
-        </p>
+        <h1 className={styles.title}>{t.notFound.title}</h1>
+        <p className={styles.text}>{t.notFound.text}</p>
         <Link to="/" className={styles.button}>
-          На головну
+          {t.notFound.home}
         </Link>
       </div>
     </section>

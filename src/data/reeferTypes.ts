@@ -4,8 +4,6 @@ import van from '../assets/images/type-van.webp';
 
 export interface ReeferType {
   id: string;
-  title: string;
-  description: string;
   image: string;
   /** Позиція кадру при обрізанні (CSS object-position) */
   position?: string;
@@ -15,22 +13,16 @@ export interface ReeferType {
 export const reeferTypes: ReeferType[] = [
   {
     id: 'trailers',
-    title: 'Рефрижераторні напівпричепи',
-    description: 'Напівпричепи з холодильними установками для магістральних перевезень',
     image: trailers,
     position: 'center 40%',
   },
   {
     id: 'van',
-    title: 'Фургони-рефрижератори',
-    description: 'Вантажівки з рефрижераторним фургоном для міста й регіонів',
     image: van,
     position: 'center 40%',
   },
   {
     id: 'carrier',
-    title: 'Напівпричепи з установками Carrier',
-    description: 'Ремонт і обслуговування установок на напівпричепах',
     image: carrier,
     position: 'center 40%',
   },

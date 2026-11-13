@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 import { useContactsModal } from '../../context/ContactsModalContext';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { ContactList } from '../ContactList/ContactList';
@@ -11,6 +12,7 @@ import styles from './ContactsModal.module.css';
 /** Спливаюче вікно з контактами. Закривається: кнопка ✕, клік по фону, Escape. */
 export function ContactsModal() {
   const { isOpen, close } = useContactsModal();
+  const { t } = useLanguage();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useLockBodyScroll(isOpen);
@@ -52,16 +54,14 @@ export function ContactsModal() {
               type="button"
               className={styles.close}
               onClick={close}
-              aria-label="Закрити"
+              aria-label={t.contacts.close}
             >
               <X size={22} aria-hidden="true" />
             </button>
             <h2 id="contacts-title" className={styles.title}>
-              Контакти
+              {t.contacts.title}
             </h2>
-            <p className={styles.subtitle}>
-              Зв’яжіться з нами — запишіться на консультацію або ремонт.
-            </p>
+            <p className={styles.subtitle}>{t.contacts.subtitle}</p>
             <ContactList variant="modal" />
             <ContactMap variant="modal" />
           </motion.div>

@@ -3,12 +3,14 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { ContactsModal } from '../../components/ContactsModal/ContactsModal';
 import { Footer } from '../../components/Footer/Footer';
 import { Header } from '../../components/Header/Header';
+import { useLanguage } from '../../context/LanguageContext';
 import type { ScrollState } from '../../hooks/useSectionNavigation';
 import styles from './MainLayout.module.css';
 
 /** Спільний каркас усіх сторінок: Header + контент + Footer + вікно контактів. */
 export function MainLayout() {
   const { pathname, state } = useLocation();
+  const { t } = useLanguage();
 
   // Нова сторінка відкривається зверху (якщо не просили скрол до секції)
   useEffect(() => {
@@ -22,7 +24,7 @@ export function MainLayout() {
     <div className={styles.layout}>
       <Header />
       <main className={styles.main}>
-        <Suspense fallback={<div className={styles.loading}>Завантаження…</div>}>
+        <Suspense fallback={<div className={styles.loading}>{t.loading}</div>}>
           <Outlet />
         </Suspense>
       </main>
