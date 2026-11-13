@@ -29,7 +29,6 @@ export function Footer() {
         <div className={styles.top}>
           <div className={styles.brand}>
             <Logo size="footer" />
-            <p className={styles.tagline}>{t.footer.tagline}</p>
           </div>
 
           <nav className={styles.links} aria-label={t.footer.quickLinks}>

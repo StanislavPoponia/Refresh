@@ -39,6 +39,12 @@
   display: flex;
 }
 .card {
+  /* Іконка й жирний заголовок в одному рядку, опис — під ними */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 14px;
+  align-items: center;
+  align-content: start; /* картки однакової висоти не розтягують рядки */
   width: 100%;
   padding: 24px;
   background: var(--color-surface);
@@ -46,27 +52,34 @@
   border-radius: var(--radius);
   transition:
     box-shadow 0.25s,
-    border-color 0.25s;
+    border-color 0.25s,
+    scale 0.25s ease;
 }
 .card:hover {
   border-color: var(--color-primary-light);
   box-shadow: var(--shadow);
+}
+/* Картка трохи збільшується (властивість scale не конфліктує з анімацією появи) */
+@media (hover: hover) {
+  .card:hover {
+    scale: 1.04;
+  }
 }
 .icon {
   display: grid;
   place-items: center;
   width: 44px;
   height: 44px;
-  margin-bottom: 14px;
   color: var(--color-primary-dark);
   background: var(--color-ice);
   border-radius: 12px;
 }
 .cardTitle {
-  margin-bottom: 8px;
   font-size: 1.1rem;
 }
 .card p {
+  grid-column: 1 / -1;
+  margin-top: 12px;
   color: var(--color-gray-700);
   font-size: 0.95rem;
 }
