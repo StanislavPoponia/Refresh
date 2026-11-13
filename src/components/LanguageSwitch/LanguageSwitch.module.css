@@ -10,15 +10,17 @@
   background: var(--color-ice);
   border: 1px solid var(--color-gray-100);
   border-radius: 999px;
+  /* Разом із хедером: у стиснутому хедері перемикач менший (--lang-scale задає Header) */
+  transform: scale(var(--lang-scale, 1));
   transition:
     transform 0.25s ease,
     background 0.3s,
     border-color 0.3s;
 }
-/* Наведення: перемикач трохи збільшується */
-.switch:hover,
-.switch:focus-within {
-  transform: scale(1.12);
+/* Активний стан (миша над перемикачем / щойно натиснули на дотику): трохи збільшується */
+.switch.active,
+.switch:has(:focus-visible) {
+  transform: scale(var(--lang-scale-hover, 1.12));
 }
 .thumb {
   position: absolute;
@@ -55,8 +57,8 @@
 :global([data-theme='dark']) .badge {
   fill: currentColor;
 }
-.switch:hover .badge,
-.switch:focus-within .badge {
+.switch.active .badge,
+.switch:has(:focus-visible) .badge {
   opacity: 1;
   transform: scale(1) rotate(0deg);
 }

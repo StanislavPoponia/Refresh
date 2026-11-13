@@ -2,6 +2,9 @@
   /* Великий стан (вгорі сторінки) */
   --current-header-height: 88px;
   --logo-height: 68px;
+  --lang-scale: 1; /* розмір перемикача мови */
+  --lang-scale-hover: 1.12; /* і при наведенні */
+  --theme-scale: 1; /* розмір перемикача теми */
 
   position: sticky;
   top: 0;
@@ -13,6 +16,9 @@
 .scrolled {
   --current-header-height: var(--header-height);
   --logo-height: 56px;
+  --lang-scale: 0.78;
+  --lang-scale-hover: 0.9;
+  --theme-scale: 0.8;
 }
 .inner {
   display: flex;
@@ -54,7 +60,11 @@
   background: var(--color-ice);
   border: 1px solid var(--color-gray-100);
   border-radius: 999px;
+  /* Разом із хедером: у стиснутому хедері перемикач теми менший */
+  transform: scale(var(--theme-scale, 1));
+  transform-origin: right center;
   transition:
+    transform 0.25s ease,
     background 0.3s,
     border-color 0.3s;
 }

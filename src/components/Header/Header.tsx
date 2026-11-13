@@ -24,6 +24,8 @@ export function Header() {
   const isDark = theme === 'dark';
 
   const [scrolled, setScrolled] = useState(false);
+  // Мишка над хедером — він повертається до стандартного (великого) вигляду
+  const [hovered, setHovered] = useState(false);
 
   // Хедер стискається після прокрутки вниз. Гістерезис (різні пороги) не дає йому
   // "смикатися" на межі, бо зміна висоти хедера зсуває контент сторінки.
@@ -127,7 +129,11 @@ export function Header() {
   );
 
   return (
-    <header className={clsx(styles.header, scrolled && styles.scrolled)}>
+    <header
+      className={clsx(styles.header, scrolled && !hovered && styles.scrolled)}
+      onPointerEnter={(event) => event.pointerType === 'mouse' && setHovered(true)}
+      onPointerLeave={(event) => event.pointerType === 'mouse' && setHovered(false)}
+    >
       <div className={clsx('container', styles.inner)}>
         <div className={styles.brand}>
           <LanguageSwitch />

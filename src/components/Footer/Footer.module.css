@@ -40,10 +40,13 @@
     color 0.2s,
     background 0.2s;
 }
-.links a:hover,
-.links button:hover {
-  color: var(--color-primary-dark);
-  background: var(--color-ice);
+/* :hover лише для пристроїв з мишкою — на дотику він «залипає» після натискання */
+@media (hover: hover) {
+  .links a:hover,
+  .links button:hover {
+    color: var(--color-primary-dark);
+    background: var(--color-ice);
+  }
 }
 /* Іконки: така сама анімація при наведенні, як у хедері */
 .flake {
@@ -52,11 +55,15 @@
   flex-shrink: 0;
   transition: transform 0.25s ease;
 }
-.links a:hover .flake,
-.links button:hover .flake,
 .links a:focus-visible .flake,
 .links button:focus-visible .flake {
   transform: scale(1.5) rotate(30deg);
+}
+@media (hover: hover) {
+  .links a:hover .flake,
+  .links button:hover .flake {
+    transform: scale(1.5) rotate(30deg);
+  }
 }
 /* Вогник у темній темі при наведенні заливається червоним */
 .flame {
@@ -64,11 +71,15 @@
     transform 0.25s ease,
     fill 0.25s ease;
 }
-.links a:hover .flame,
-.links button:hover .flame,
 .links a:focus-visible .flame,
 .links button:focus-visible .flame {
   fill: var(--color-primary);
+}
+@media (hover: hover) {
+  .links a:hover .flame,
+  .links button:hover .flame {
+    fill: var(--color-primary);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .flake,

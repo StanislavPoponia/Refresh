@@ -3,6 +3,7 @@
   place-items: center;
   min-height: 60vh;
   padding-block: 56px;
+  padding-inline: var(--gutter);
   background-image: var(--photo-overlay), url('../../assets/images/bg-reefers.webp');
   background-size: cover;
   background-position: center;
@@ -12,7 +13,19 @@
   gap: 16px;
   justify-items: center;
   max-width: 640px;
+  padding: 32px 24px;
   text-align: center;
+  /* Скляна панель: розмиває фонове фото під текстом, але фото лишається видно */
+  background: color-mix(in srgb, var(--color-surface) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-surface) 45%, transparent);
+  border-radius: var(--radius);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  backdrop-filter: blur(14px) saturate(1.1);
+}
+@media (min-width: 768px) {
+  .box {
+    padding: 40px 48px;
+  }
 }
 .icon {
   color: var(--color-primary);
@@ -20,8 +33,16 @@
 .title {
   font-size: clamp(1.6rem, 5vw, 2.4rem);
 }
+.title,
 .text {
-  color: var(--color-gray-700);
+  /* Легке свічення навколо літер у кольорі теми — читається навіть на строкатому фото */
+  text-shadow: 0 0 12px color-mix(in srgb, var(--color-surface) 80%, transparent);
+}
+.text {
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--color-text);
 }
 .button {
   display: inline-flex;
