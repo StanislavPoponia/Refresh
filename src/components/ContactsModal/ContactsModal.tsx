@@ -61,7 +61,6 @@ export function ContactsModal() {
             <h2 id="contacts-title" className={styles.title}>
               {t.contacts.title}
             </h2>
-            <p className={styles.subtitle}>{t.contacts.subtitle}</p>
             <ContactList variant="modal" />
             <ContactMap variant="modal" />
           </motion.div>
