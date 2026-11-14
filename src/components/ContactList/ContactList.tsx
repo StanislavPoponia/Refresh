@@ -6,6 +6,9 @@ import { format, useLanguage } from '../../context/LanguageContext';
 import { contacts, emailLink, mapLink, telLink, viberLink } from '../../data/contacts';
 import styles from './ContactList.module.css';
 
+/** Скільки пікселів треба прокрутити, щоб відкритий графік сам закрився. */
+const SCHEDULE_CLOSE_SCROLL_PX = 160;
+
 interface ContactListProps {
   /** modal — для вікна контактів, footer — розписано у футері */
   variant?: 'modal' | 'footer';
@@ -18,14 +21,33 @@ export function ContactList({ variant = 'modal' }: ContactListProps) {
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const scheduleRef = useRef<HTMLDivElement>(null);
 
-  // Клік/дотик будь-де поза блоком графіка згортає його
+  // Клік/дотик поза блоком графіка згортає його
   useEffect(() => {
     if (!scheduleOpen) return;
     const onPointerDown = (event: PointerEvent) => {
       if (!scheduleRef.current?.contains(event.target as Node)) setScheduleOpen(false);
     };
+    // Згортаємо, лише коли прокрутили далі за SCHEDULE_CLOSE_SCROLL_PX від місця відкриття
+    const starts = new Map<EventTarget, number>();
+    const position = (target: EventTarget) =>
+      target instanceof Element ? target.scrollTop : window.scrollY;
+    const onScroll = (event: Event) => {
+      const target = event.target ?? document;
+      const now = position(target);
+      const start = starts.get(target);
+      if (start === undefined) {
+        starts.set(target, now);
+      } else if (Math.abs(now - start) > SCHEDULE_CLOSE_SCROLL_PX) {
+        setScheduleOpen(false);
+      }
+    };
+    starts.set(document, window.scrollY);
     document.addEventListener('pointerdown', onPointerDown);
-    return () => document.removeEventListener('pointerdown', onPointerDown);
+    window.addEventListener('scroll', onScroll, { passive: true, capture: true });
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('scroll', onScroll, true);
+    };
   }, [scheduleOpen]);
 
   return (

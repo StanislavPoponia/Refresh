@@ -11,12 +11,14 @@ import styles from './ProductModal.module.css';
 interface ProductModalProps {
   product: Product | null;
   onClose: () => void;
+  /** Повторно відкрити картку цього товару (після закриття контактів). */
+  onReopen: (product: Product) => void;
 }
 
 /** Картка товару по центру екрана. Закривається: ✕, клік по фону, Escape. */
-export function ProductModal({ product, onClose }: ProductModalProps) {
+export function ProductModal({ product, onClose, onReopen }: ProductModalProps) {
   const { t } = useLanguage();
-  const { open: openContacts } = useContactsModal();
+  const { openWithReturn } = useContactsModal();
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useLockBodyScroll(product !== null);
@@ -32,8 +34,10 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
   }, [product, onClose]);
 
   const askAboutProduct = () => {
+    if (!product) return;
+    const current = product;
     onClose();
-    openContacts();
+    openWithReturn(() => onReopen(current));
   };
 
   return createPortal(

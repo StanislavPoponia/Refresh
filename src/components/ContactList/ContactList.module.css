@@ -119,6 +119,26 @@
 .footer {
   color: var(--color-gray-700);
 }
+/* У футері Viber — в одному рядку з номером, елементи трохи менші */
+.footer {
+  font-size: 0.9rem;
+}
+.footer .item {
+  gap: 10px;
+}
+.footer .icon {
+  width: 18px;
+  height: 18px;
+}
+.footer .phoneRow {
+  flex-wrap: nowrap;
+  gap: 8px;
+  white-space: nowrap;
+}
+.footer .viber {
+  padding: 1px 8px;
+  font-size: 0.7rem;
+}
 /* Список випливає поверх (і в модалці, і у футері), щоб не зсувати інший вміст */
 .scheduleList {
   position: absolute;

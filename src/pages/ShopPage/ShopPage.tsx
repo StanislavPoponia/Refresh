@@ -61,7 +61,7 @@ export default function ShopPage() {
           <p className={styles.empty}>{t.shop.empty}</p>
         )}
       </div>
-      <ProductModal product={selected} onClose={closeModal} />
+      <ProductModal product={selected} onClose={closeModal} onReopen={setSelected} />
     </section>
   );
 }
