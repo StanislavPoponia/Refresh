@@ -33,7 +33,7 @@ export function ContactList({ variant = 'modal' }: ContactListProps) {
           <span className={styles.label}>{c.labelPhones}</span>
           {contacts.phones.map((phone) => (
             <span key={phone.value} className={styles.phoneRow}>
-              <a href={telLink(phone.value)} className={styles.link}>
+              <a href={phone.viber ? viberLink(phone.value) : telLink(phone.value)} className={styles.link}>
                 {phone.display}
               </a>
               {phone.viber && (

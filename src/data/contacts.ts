@@ -9,7 +9,7 @@ export const contacts: ContactInfo = {
   mapQuery: 'вулиця Сергія Ватрича, 24Б, Чернівці, Чернівецька область, Україна',
   email: 'jelezniyser@gmail.com',
   phones: [
-    { display: '+38 (095) 201-60-46', value: '+380952016046', viber: true },
+    { display: '+38 (095) 201-60-46', value: '+380952016046', viber: false },
     { display: '+38 (050) 522-70-03', value: '+380505227003', viber: true },
   ],
 };

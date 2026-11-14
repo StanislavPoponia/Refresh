@@ -187,9 +187,14 @@ export const en: Dictionary = {
   },
 
   shop: {
-    title: 'Spare parts shop is under construction',
-    text: 'We are preparing a catalogue of spare parts for reefers. The shop will appear here soon — in the meantime, contact us and we will find the part you need.',
-    home: 'Back to home',
+    title: 'Spare parts shop',
+    searchLabel: 'Search parts',
+    searchPlaceholder: 'Search parts…',
+    close: 'Close',
+    ask: 'Ask about price and availability',
+    clear: 'Clear search',
+    article: 'Part No.',
+    empty: 'Nothing found. Contact us and we will find the part you need.',
   },
 
   notFound: {
