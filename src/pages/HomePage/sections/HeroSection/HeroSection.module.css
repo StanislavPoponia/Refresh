@@ -18,8 +18,10 @@
 .lead {
   max-width: 520px;
   margin-bottom: 26px;
-  font-size: 1.05rem;
-  color: var(--color-gray-700);
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--color-text);
 }
 .actions {
   display: flex;
