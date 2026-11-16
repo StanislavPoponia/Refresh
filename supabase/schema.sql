@@ -12,6 +12,10 @@ create table if not exists public.products (
 
 alter table public.products enable row level security;
 
+-- Права на таблицю (потрібні, навіть якщо автоматичне відкриття таблиць вимкнене)
+grant select on public.products to anon, authenticated;
+grant insert, update, delete on public.products to authenticated;
+
 -- Дивитися товари може будь-хто
 drop policy if exists "products_read" on public.products;
 create policy "products_read" on public.products
