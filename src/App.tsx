@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage/HomePage';
 
 // Другорядні сторінки завантажуються окремими чанками
 const ShopPage = lazy(() => import('./pages/ShopPage/ShopPage'));
+const AdminPage = lazy(() => import('./pages/AdminPage/AdminPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
       <Route element={<MainLayout />}>
         <Route index element={<HomePage />} />
         <Route path="shop" element={<ShopPage />} />
+        <Route path="admin" element={<AdminPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

@@ -72,7 +72,11 @@ export function ProductModal({ product, onClose, onReopen }: ProductModalProps) 
               <X size={22} aria-hidden="true" />
             </button>
             <div className={styles.photo} aria-hidden="true">
-              <ImageOff size={72} />
+              {product.imageUrl ? (
+                <img src={product.imageUrl} alt="" className={styles.img} />
+              ) : (
+                <ImageOff size={72} />
+              )}
             </div>
             <div className={styles.info}>
               <h2 id="product-title" className={styles.title}>
@@ -81,7 +85,7 @@ export function ProductModal({ product, onClose, onReopen }: ProductModalProps) 
               <p className={styles.article}>
                 {t.shop.article}: {product.article}
               </p>
-              <p className={styles.description}>{product.description}</p>
+              <p className={styles.description}>{product.category}</p>
               <button type="button" className={styles.ask} onClick={askAboutProduct}>
                 {t.shop.ask}
               </button>

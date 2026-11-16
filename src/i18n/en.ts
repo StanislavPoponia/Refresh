@@ -202,6 +202,9 @@ export const en: Dictionary = {
     ask: 'Ask about price and availability',
     clear: 'Clear search',
     article: 'Part No.',
+    categories: 'Categories',
+    allCategories: 'All',
+    error: 'Could not load the catalog. Please try again later or contact us.',
     empty: 'Nothing found. Contact us and we will find the part you need.',
   },
 
