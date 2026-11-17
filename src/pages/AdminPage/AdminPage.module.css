@@ -9,12 +9,14 @@
 }
 .box {
   display: grid;
+  grid-template-columns: minmax(0, 1fr); /* колонка може стискатися — без горизонтального виходу за екран */
   gap: 20px;
   max-width: 720px;
   margin-inline: auto;
 }
 .bar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
@@ -29,6 +31,9 @@
 }
 .card {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  box-sizing: border-box;
+  min-width: 0;
   gap: 14px;
   padding: 20px;
   background: var(--color-surface);
@@ -37,22 +42,116 @@
 }
 .field {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
   gap: 6px;
   font-size: 0.9rem;
   font-weight: 600;
 }
 .field input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
   min-height: 46px;
   padding: 0 12px;
   font: inherit;
   font-weight: 400;
   color: var(--color-text);
+  /* Світла тема: білий фон поля й темна рамка; темна тема — як було (нижче) */
+  background: #fff;
+  border: 1.5px solid var(--color-gray-700);
+  border-radius: 8px;
+}
+:global(:root[data-theme='dark']) .field input {
   background: var(--color-page);
   border: 1px solid var(--color-gray-100);
-  border-radius: 8px;
+}
+/* Наведення і фокус (клік у поле): рамка змінює колір на колір теми замість зовнішнього
+   контуру */
+.field input {
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field input:hover,
+.field input:focus,
+.field input:focus-visible,
+:global(:root[data-theme='dark']) .field input:hover,
+:global(:root[data-theme='dark']) .field input:focus,
+:global(:root[data-theme='dark']) .field input:focus-visible {
+  outline: none;
+  border-color: var(--color-primary);
+  /* Одна суцільна рамка кольору теми; текст у полі не рухається */
+  box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+@media (prefers-reduced-motion: reduce) {
+  .field input {
+    transition: none;
+  }
 }
 .field input[type='file'] {
   padding: 10px 12px;
+}
+.fileRow {
+  display: flex;
+  align-items: center;
+  gap: 18px; /* запас на збільшення поля при наведенні/фокусі */
+}
+.fileRow input {
+  flex: 1;
+  min-width: 0;
+}
+.clearFile {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  /* Колір теми: синій у світлій, червоний у темній */
+  color: var(--color-primary);
+  cursor: pointer;
+  background: transparent;
+  border: 1.5px solid var(--color-primary);
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+}
+.clearFile svg {
+  transition: transform 0.25s ease;
+}
+/* Наведення — як на пункті меню «Наші послуги»: фон, колір і іконка збільшується з поворотом */
+.clearFile:hover:not(:disabled),
+.clearFile:focus-visible {
+  color: var(--color-primary-dark);
+  background: var(--color-ice);
+}
+.clearFile:hover:not(:disabled) svg,
+.clearFile:focus-visible svg {
+  transform: scale(1.5) rotate(30deg);
+}
+.clearFile:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+@media (prefers-reduced-motion: reduce) {
+  .clearFile,
+  .clearFile svg {
+    transition: none;
+  }
+}
+/* Кнопка «Вибрати файл» у стилі кнопок сторінки */
+.field input[type='file']::file-selector-button {
+  min-height: 34px;
+  margin-right: 12px;
+  padding: 0 18px;
+  font: inherit;
+  font-weight: 700;
+  color: var(--color-on-primary);
+  cursor: pointer;
+  background: var(--color-primary);
+  border: 0;
+  border-radius: var(--radius);
+  transition: background 0.2s;
+}
+.field input[type='file']::file-selector-button:hover {
+  background: var(--color-primary-hover);
 }
 .actions {
   display: flex;
@@ -71,8 +170,35 @@
   color: var(--color-on-primary);
   background: var(--color-primary);
 }
-.primary:hover:not(:disabled) {
+/* Наведення і фокус — як у кнопки «Наші послуги» на головній: темніша заливка, підйом на 2px і тінь */
+.primary {
+  box-shadow: var(--shadow);
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.primary:focus-visible {
+  outline: none;
+}
+@media (hover: hover) {
+  .primary:hover:not(:disabled) {
+    background: var(--color-primary-hover);
+    transform: translateY(-2px);
+  }
+}
+.primary:focus-visible:not(:disabled) {
   background: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .primary {
+    transition: none;
+  }
+  .primary:hover,
+  .primary:focus-visible {
+    transform: none;
+  }
 }
 .primary:disabled {
   opacity: 0.6;
@@ -82,6 +208,44 @@
   color: var(--color-text);
   background: var(--color-surface);
   border: 1px solid var(--color-gray-100);
+}
+/* Наведення і фокус — анімація кнопки «Наші послуги» на головній: заливка кольором теми
+   (синя у світлій, червона в темній), підйом на 2px і тінь */
+.secondary {
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.secondary:focus-visible {
+  outline: none;
+}
+@media (hover: hover) {
+  .secondary:hover {
+    color: var(--color-on-primary);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+  }
+}
+.secondary:focus-visible {
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .secondary {
+    transition: none;
+  }
+  .secondary:hover,
+  .secondary:focus-visible {
+    transform: none;
+  }
 }
 .error {
   color: #c0392b;
@@ -132,4 +296,40 @@
 }
 .icon:hover {
   background: var(--color-ice);
+}
+
+/* Вузькі телефони (~320 px): менші відступи, щоб форма повністю вміщалась */
+@media (max-width: 359px) {
+  .page {
+    padding: 32px 12px;
+  }
+  /* .container уже має власні бічні відступи — не дублюємо їх */
+  .box {
+    padding-inline: 0;
+  }
+  .card {
+    padding: 14px;
+  }
+  .title {
+    font-size: 1.3rem;
+  }
+  .fileRow {
+    gap: 10px;
+  }
+  .field input[type='file'] {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+  .field input[type='file']::file-selector-button {
+    margin-right: 8px;
+    padding: 0 12px;
+  }
+  .clearFile {
+    width: 42px;
+    height: 42px;
+  }
+  .actions > button {
+    flex: 1 1 auto;
+    padding-inline: 16px;
+  }
 }
