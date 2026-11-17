@@ -6,9 +6,15 @@ create table if not exists public.products (
   name       text not null,
   article    text not null,
   category   text not null,
+  name_en    text,                       -- переклад назви (необов'язково)
+  category_en text,                      -- переклад категорії (необов'язково)
   image_path text,                       -- шлях файлу у сховищі product-images
   created_at timestamptz not null default now()
 );
+
+-- Для вже створеної таблиці: додати стовпці перекладу
+alter table public.products add column if not exists name_en text;
+alter table public.products add column if not exists category_en text;
 
 alter table public.products enable row level security;
 

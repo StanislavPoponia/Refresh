@@ -206,6 +206,9 @@ export const en: Dictionary = {
     allCategories: 'All',
     error: 'Could not load the catalog. Please try again later or contact us.',
     empty: 'Nothing found. Contact us and we will find the part you need.',
+    filter: 'Filter',
+    resetFilter: 'Reset filter',
+    shelfEmpty: 'The shelves are being stocked right now. Please wait, or get in touch with us.',
   },
 
   notFound: {

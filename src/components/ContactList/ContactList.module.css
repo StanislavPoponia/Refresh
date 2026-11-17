@@ -98,9 +98,10 @@
 }
 .scheduleRow {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0 8px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 0 16px;
+  white-space: nowrap;
   padding: 3px 0;
   border-bottom: 1px solid var(--color-ice);
   font-size: 0.9rem;
@@ -144,7 +145,11 @@
   position: absolute;
   top: calc(100% + 10px);
   left: 0;
-  right: 0;
+  /* Ширина не менша за кнопку, але розтягується під найдовший рядок — день і години в один ряд */
+  width: max-content;
+  min-width: 100%;
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
   z-index: 20;
   text-align: center;
   padding: 4px 14px;

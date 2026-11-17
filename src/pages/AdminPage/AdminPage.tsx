@@ -66,6 +66,8 @@ function Panel() {
   const [name, setName] = useState('');
   const [article, setArticle] = useState('');
   const [category, setCategory] = useState('');
+  const [nameEn, setNameEn] = useState('');
+  const [categoryEn, setCategoryEn] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [fileKey, setFileKey] = useState(0);
   const [busy, setBusy] = useState(false);
@@ -78,6 +80,8 @@ function Panel() {
     setName('');
     setArticle('');
     setCategory('');
+    setNameEn('');
+    setCategoryEn('');
     setFile(null);
     setFileKey((k) => k + 1);
   };
@@ -87,6 +91,8 @@ function Panel() {
     setName(p.name);
     setArticle(p.article);
     setCategory(p.category);
+    setNameEn(p.nameEn ?? '');
+    setCategoryEn(p.categoryEn ?? '');
     setFile(null);
     setFileKey((k) => k + 1);
     setMessage('');
@@ -114,7 +120,10 @@ function Panel() {
         await removeImage(imagePath);
         imagePath = newPath;
       }
-      const row = { name: name.trim(), article: article.trim(), category: category.trim(), image_path: imagePath };
+      const row = { name: name.trim(), article: article.trim(), category: category.trim(),
+        name_en: nameEn.trim() || null,
+        category_en: categoryEn.trim() || null,
+        image_path: imagePath };
       const { error: dbErr } = editing
         ? await supabase.from('products').update(row).eq('id', editing.id)
         : await supabase.from('products').insert(row);
@@ -167,6 +176,14 @@ function Panel() {
               <option key={c} value={c} />
             ))}
           </datalist>
+        </label>
+        <label className={styles.field}>
+          Назва англійською (необов’язково)
+          <input value={nameEn} onChange={(e) => setNameEn(e.target.value)} />
+        </label>
+        <label className={styles.field}>
+          Категорія англійською (необов’язково)
+          <input value={categoryEn} onChange={(e) => setCategoryEn(e.target.value)} />
         </label>
         <label className={styles.field}>
           Фото {editing?.imageUrl && '(залиште порожнім, щоб не змінювати)'}

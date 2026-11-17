@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ImageOff, X } from 'lucide-react';
 import { useContactsModal } from '../../context/ContactsModalContext';
 import { useLanguage } from '../../context/LanguageContext';
-import type { Product } from '../../data/products';
+import { productCategory, productName, type Product } from '../../data/products';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import styles from './ProductModal.module.css';
 
@@ -17,7 +17,7 @@ interface ProductModalProps {
 
 /** Картка товару по центру екрана. Закривається: ✕, клік по фону, Escape. */
 export function ProductModal({ product, onClose, onReopen }: ProductModalProps) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { openWithReturn } = useContactsModal();
   const closeRef = useRef<HTMLButtonElement>(null);
 
@@ -80,12 +80,12 @@ export function ProductModal({ product, onClose, onReopen }: ProductModalProps) 
             </div>
             <div className={styles.info}>
               <h2 id="product-title" className={styles.title}>
-                {product.name}
+                {productName(product, lang)}
               </h2>
               <p className={styles.article}>
                 {t.shop.article}: {product.article}
               </p>
-              <p className={styles.description}>{product.category}</p>
+              <p className={styles.description}>{productCategory(product, lang)}</p>
               <button type="button" className={styles.ask} onClick={askAboutProduct}>
                 {t.shop.ask}
               </button>

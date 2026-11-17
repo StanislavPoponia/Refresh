@@ -1,7 +1,11 @@
 .page {
   min-height: 100vh;
   padding: 56px var(--gutter);
-  background: var(--color-bg-alt);
+  /* Той самий фон, що на сторінці магазину */
+  background-image: var(--photo-overlay), url('../../assets/images/bg-reefers.webp');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 .box {
   display: grid;
@@ -17,6 +21,8 @@
 }
 .title {
   font-size: 1.6rem;
+  /* Читається на фото: легке світіння навколо літер у кольорі теми */
+  text-shadow: 0 0 12px color-mix(in srgb, var(--color-surface) 80%, transparent);
 }
 .subtitle {
   font-size: 1.15rem;
